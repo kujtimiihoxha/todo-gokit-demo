@@ -2,11 +2,10 @@
 package http
 
 import (
-	http1 "net/http"
-
-	"github.com/go-kit/kit/transport/http"
+	http "github.com/go-kit/kit/transport/http"
 	mux "github.com/gorilla/mux"
 	endpoint "github.com/kujtimiihoxha/todo-gokit-demo/todo/pkg/endpoint"
+	http1 "net/http"
 )
 
 //  NewHTTPHandler returns a handler that makes a set of endpoints available on

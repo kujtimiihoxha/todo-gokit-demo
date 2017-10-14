@@ -2,7 +2,6 @@ package endpoint
 
 import (
 	context "context"
-
 	endpoint "github.com/go-kit/kit/endpoint"
 	io "github.com/kujtimiihoxha/todo-gokit-demo/todo/pkg/io"
 	service "github.com/kujtimiihoxha/todo-gokit-demo/todo/pkg/service"
@@ -13,7 +12,7 @@ type GetRequest struct{}
 
 // GetResponse collects the response parameters for the Get method.
 type GetResponse struct {
-	T     []io.Todo `json:"todos"`
+	T     []io.Todo `json:"t"`
 	Error error     `json:"error"`
 }
 
@@ -40,7 +39,7 @@ type AddRequest struct {
 
 // AddResponse collects the response parameters for the Add method.
 type AddResponse struct {
-	T     io.Todo `json:"todo"`
+	T     io.Todo `json:"t"`
 	Error error   `json:"error"`
 }
 
@@ -82,6 +81,30 @@ func MakeSetCompleteEndpoint(s service.TodoService) endpoint.Endpoint {
 
 // Failed implements Failer.
 func (r SetCompleteResponse) Failed() error {
+	return r.Error
+}
+
+// RemoveCompleteRequest collects the request parameters for the RemoveComplete method.
+type RemoveCompleteRequest struct {
+	Id string `json:"id"`
+}
+
+// RemoveCompleteResponse collects the response parameters for the RemoveComplete method.
+type RemoveCompleteResponse struct {
+	Error error `json:"error"`
+}
+
+// MakeRemoveCompleteEndpoint returns an endpoint that invokes RemoveComplete on the service.
+func MakeRemoveCompleteEndpoint(s service.TodoService) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		req := request.(RemoveCompleteRequest)
+		error := s.RemoveComplete(ctx, req.Id)
+		return RemoveCompleteResponse{Error: error}, nil
+	}
+}
+
+// Failed implements Failer.
+func (r RemoveCompleteResponse) Failed() error {
 	return r.Error
 }
 
@@ -146,40 +169,6 @@ func (e Endpoints) SetComplete(ctx context.Context, id string) (error error) {
 	return response.(SetCompleteResponse).Error
 }
 
-// Delete implements Service. Primarily useful in a client.
-func (e Endpoints) Delete(ctx context.Context, id string) (error error) {
-	request := DeleteRequest{Id: id}
-	response, err := e.DeleteEndpoint(ctx, request)
-	if err != nil {
-		return
-	}
-	return response.(DeleteResponse).Error
-}
-
-// RemoveCompleteRequest collects the request parameters for the RemoveComplete method.
-type RemoveCompleteRequest struct {
-	Id string `json:"id"`
-}
-
-// RemoveCompleteResponse collects the response parameters for the RemoveComplete method.
-type RemoveCompleteResponse struct {
-	Error error `json:"error"`
-}
-
-// MakeRemoveCompleteEndpoint returns an endpoint that invokes RemoveComplete on the service.
-func MakeRemoveCompleteEndpoint(s service.TodoService) endpoint.Endpoint {
-	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		req := request.(RemoveCompleteRequest)
-		error := s.RemoveComplete(ctx, req.Id)
-		return RemoveCompleteResponse{Error: error}, nil
-	}
-}
-
-// Failed implements Failer.
-func (r RemoveCompleteResponse) Failed() error {
-	return r.Error
-}
-
 // RemoveComplete implements Service. Primarily useful in a client.
 func (e Endpoints) RemoveComplete(ctx context.Context, id string) (error error) {
 	request := RemoveCompleteRequest{Id: id}
@@ -188,4 +177,14 @@ func (e Endpoints) RemoveComplete(ctx context.Context, id string) (error error) 
 		return
 	}
 	return response.(RemoveCompleteResponse).Error
+}
+
+// Delete implements Service. Primarily useful in a client.
+func (e Endpoints) Delete(ctx context.Context, id string) (error error) {
+	request := DeleteRequest{Id: id}
+	response, err := e.DeleteEndpoint(ctx, request)
+	if err != nil {
+		return
+	}
+	return response.(DeleteResponse).Error
 }

@@ -3,12 +3,6 @@ package service
 import (
 	flag "flag"
 	fmt "fmt"
-	net "net"
-	http1 "net/http"
-	os "os"
-	signal "os/signal"
-	syscall "syscall"
-
 	endpoint1 "github.com/go-kit/kit/endpoint"
 	log "github.com/go-kit/kit/log"
 	prometheus "github.com/go-kit/kit/metrics/prometheus"
@@ -21,8 +15,13 @@ import (
 	zipkingoopentracing "github.com/openzipkin/zipkin-go-opentracing"
 	prometheus1 "github.com/prometheus/client_golang/prometheus"
 	promhttp "github.com/prometheus/client_golang/prometheus/promhttp"
+	net "net"
+	http1 "net/http"
+	os "os"
+	signal "os/signal"
 	appdash "sourcegraph.com/sourcegraph/appdash"
 	opentracing "sourcegraph.com/sourcegraph/appdash/opentracing"
+	syscall "syscall"
 )
 
 var tracer opentracinggo.Tracer
@@ -91,6 +90,7 @@ func Run() {
 func initHttpHandler(endpoints endpoint.Endpoints, g *group.Group) {
 	options := defaultHttpOptions(logger, tracer)
 	// Add your http options here
+
 	httpHandler := http.NewHTTPHandler(endpoints, options)
 	httpListener, err := net.Listen("tcp", *httpAddr)
 	if err != nil {

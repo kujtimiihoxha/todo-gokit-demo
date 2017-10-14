@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com/kujtimiihoxha/todo-gokit-demo/todo/pkg/db"
 	"github.com/kujtimiihoxha/todo-gokit-demo/todo/pkg/io"
+	"github.com/kujtimiihoxha/todo-gokit-demo/todo/pkg/db"
 	"gopkg.in/mgo.v2/bson"
 )
 
@@ -49,7 +49,6 @@ func (b *basicTodoService) SetComplete(ctx context.Context, id string) (error er
 	c := session.DB("todo_app").C("todos")
 	return c.Update(bson.M{"_id": bson.ObjectIdHex(id)}, bson.M{"$set": bson.M{"complete": true}})
 }
-
 func (b *basicTodoService) RemoveComplete(ctx context.Context, id string) (error error) {
 	session, err := db.GetMongoSession()
 	if err != nil {
@@ -59,7 +58,6 @@ func (b *basicTodoService) RemoveComplete(ctx context.Context, id string) (error
 	c := session.DB("todo_app").C("todos")
 	return c.Update(bson.M{"_id": bson.ObjectIdHex(id)}, bson.M{"$set": bson.M{"complete": false}})
 }
-
 func (b *basicTodoService) Delete(ctx context.Context, id string) (error error) {
 	session, err := db.GetMongoSession()
 	if err != nil {
@@ -69,7 +67,6 @@ func (b *basicTodoService) Delete(ctx context.Context, id string) (error error) 
 	c := session.DB("todo_app").C("todos")
 	return c.Remove(bson.M{"_id": bson.ObjectIdHex(id)})
 }
-
 // NewBasicTodoService returns a naive, stateless implementation of TodoService.
 func NewBasicTodoService() TodoService {
 	return &basicTodoService{}

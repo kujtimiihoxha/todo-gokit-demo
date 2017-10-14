@@ -1,9 +1,9 @@
-package: github.com/kujtimiihoxha/todo-gokit-demo
+package: github.com/kujtimiihoxha/todo-gokit-demo/examples
 import:
 - package: github.com/go-kit/kit
-  version: master
-- package: gopkg.in/mgo.v2
+  version: ^0.6.0
 - package: github.com/gorilla/mux
   version: ^1.5.0
 - package: github.com/gorilla/handlers
   version: ^1.2.1
+- package: gopkg.in/mgo.v2

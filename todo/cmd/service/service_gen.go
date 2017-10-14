@@ -39,3 +39,9 @@ func addDefaultEndpointMiddleware(logger log.Logger, duration *prometheus.Summar
 func addDefaultServiceMiddleware(logger log.Logger, mw []service.Middleware) []service.Middleware {
 	return append(mw, service.LoggingMiddleware(logger))
 }
+func addEndpointMiddlewareToAllMethods(mw map[string][]endpoint1.Middleware, m endpoint1.Middleware) {
+	methods := []string{"Get", "Add", "SetComplete", "RemoveComplete", "Delete"}
+	for _, v := range methods {
+		mw[v] = append(mw[v], m)
+	}
+}

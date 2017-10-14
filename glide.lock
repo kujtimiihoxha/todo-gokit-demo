@@ -1,8 +1,8 @@
-hash: 75508e3f560500e1cad99cb806b7dc827ed6fbadbd6930b42efc1380fe6594df
-updated: 2017-10-08T01:34:32.18119553+02:00
+hash: f4f8031db1c2b1c7fd4d2a567d379f6b771669c8ff83e5f8adcc58d651ebbcab
+updated: 2017-10-14T18:53:47.129570713+02:00
 imports:
 - name: github.com/apache/thrift
-  version: 9f9e30b51e3912c0b63258badf5501d3cb2550be
+  version: 8b8a8efea13d1c97f856053af0a5c0e6a8a76354
   subpackages:
   - lib/go/thrift
 - name: github.com/beorn7/perks
@@ -36,7 +36,7 @@ imports:
 - name: github.com/go-stack/stack
   version: 817915b46b97fd7bb80e8ab6b69f01a53ac3eebf
 - name: github.com/gogo/protobuf
-  version: 342cbe0a04158f6dcb03ca0079991a51a4248c02
+  version: 0c5dcd73e6fd1ac6c452a68ec7f8d463d111be66
   subpackages:
   - io
   - proto
@@ -60,7 +60,7 @@ imports:
 - name: github.com/kr/logfmt
   version: b84e30acd515aadc4b783ad4ff83aff3299bdfe0
 - name: github.com/lightstep/lightstep-tracer-go
-  version: 1e25a648c27c4f33bd96964cc0192a2f00ba60f3
+  version: 0b1008d189003437ec6a614f8acdc2b058bae07f
   subpackages:
   - collectorpb
   - lightstep_thrift
@@ -133,7 +133,7 @@ imports:
   - lex/httplex
   - trace
 - name: golang.org/x/text
-  version: 825fc78a2fd6fa0a5447e300189e3219e05e1f25
+  version: c01e4764d870b77f8abe5096ee19ad20d80e8075
   subpackages:
   - secure/bidirule
   - transform
@@ -145,7 +145,7 @@ imports:
   - googleapis/api/annotations
   - googleapis/rpc/status
 - name: google.golang.org/grpc
-  version: 06233310cc312165d1a5e8c1a7bb4cb51c7f402b
+  version: c209cdff16049a924bef4aa5c6f7588f0b42b2fa
   subpackages:
   - balancer
   - codes
@@ -168,10 +168,8 @@ imports:
   subpackages:
   - bson
   - internal/json
-  - internal/sasl
-  - internal/scram
 - name: sourcegraph.com/sourcegraph/appdash
-  version: 5b9b70908c0e32b53e17215ee6e9515b02ad08b2
+  version: f9a4336c02542ebbfa01c37949bd7152fb0f659c
   subpackages:
   - internal/wire
   - opentracing

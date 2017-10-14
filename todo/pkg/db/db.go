@@ -17,5 +17,5 @@ func GetMongoSession() (*mgo.Session, error) {
 			return nil, err
 		}
 	}
-	return mgoSession.Copy(), nil
+	return mgoSession.Clone(), nil
 }

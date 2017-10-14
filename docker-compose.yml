@@ -6,16 +6,16 @@ services:
       dockerfile: todo/Dockerfile
     restart: always
     volumes:
-    - .:/go/src/github.com/kujtimiihoxha/todo-gokit-demo
-    container_name: ""
+    - .:/go/src/github.com/kujtimiihoxha/todo-gokit-demo/examples
+    container_name: todo
     ports:
     - 8800:8081
   mongodb:
-    image: mongo:latest
-    container_name: "mongodb"
+    command: mongod --smallfiles --logpath=/dev/null
+    container_name: mongodb
     environment:
-      - MONGO_DATA_DIR=/data/db
-      - MONGO_LOG_DIR=/dev/null
+    - MONGO_DATA_DIR=/data/db
+    - MONGO_LOG_DIR=/dev/null
+    image: mongo:latest
     ports:
-        - 27017:27017
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    - 27017:27017
